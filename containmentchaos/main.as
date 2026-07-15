@@ -5,7 +5,7 @@ float safevalue = 1800;
 float euclidvalue = 900;
 float ketervalue = 600;
 
-float timer = 0.6;
+float timer = 0.6f;
 
 CB::Sound buzz;
 
