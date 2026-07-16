@@ -8,9 +8,12 @@ float ketervalue = 600;
 float timer = 0.6f;
 
 CB::Sound buzz;
+Image TimerIcon, TimerMeter;
 
 void Hook_Initialize() {
     buzz = CB::Sound::Load("SFX\\Radio\\Buzz.ogg");
+    TimerIcon = LoadImage("GFX\\TimerIcon.png");
+    TimerMeter = LoadImage("GFX\\TimerMeter.png");
 }
 
 void Hook_Update() {
