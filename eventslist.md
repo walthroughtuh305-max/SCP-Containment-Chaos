@@ -4,7 +4,7 @@ Fake death (1 in 5)
 
 Australia (flip camera upside down) (60 sec)
 
-Inverted controls
+Inverted controls (1 in 3)
 
 NTF Spawn (Safe: 1 in 20, Euclid: 1 in 40, Keter: 1 in 60)
 
