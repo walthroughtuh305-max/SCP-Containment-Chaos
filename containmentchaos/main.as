@@ -17,6 +17,25 @@ void Hook_Initialize() {
     TimerMeter = LoadImage("GFX\\TimerMeter.png");
 }
 
+class etimer {
+    int id;
+    float timeremaining;
+    float totalduration;
+
+    etimer(int id, float duration) {
+        this.id = id;
+        this.timeremaining = duration;
+        this.totalduration = duration;
+    }
+}
+
+array<etimer@> activeetimers;
+
+void StartTimer(int id, float duration) {
+    etimer newtimer(id, duration);
+    activeetimers.InsertLast(@newtimer);
+}
+
 void Hook_Update() {
     if (Menu::IsMainMenuOpen) return;
     if (CB::Difficulty::Current.Name == "Safe" && Menu::IsAnyOpen() == false) {
@@ -47,10 +66,22 @@ void Hook_Update() {
             ketervalue = 600;
         }
     }
+
+    for (uint i = 0; i < activeetimers.Length; i++) {
+        activeetimers[i].timeremaining -= FPSFactor;
+
+        if (activeetimers[i].timeremaining <= 0) {
+            int idfinished = activeetimers[i].id;
+            activeetimers.RemoveAt(i);
+            i--; 
+            OnEventTimerComplete(idfinished);
+        }
+    }
 }
 
 bool Hook_DrawHUD() {
-    
+    DrawBar(TimerMeter, 50, 200, 1000, 100 / 100);
+    return false;
 }
 
 void Hook_ChaosEvent(int randomevent) {
@@ -65,11 +96,17 @@ void Hook_ChaosEvent(int randomevent) {
         if (eventchance == 1) {
             eventname = "Fake death";
             CB::Player::KillAnimation = 1;
-            float eventtimer = 240;
+            StartTimer(randomevent, 1000);
         }
     }
     if (randomevent == 3) {
         eventname = "Australia";
+    }
+}
+
+void OnEventTimerComplete(int id) {
+    if (id == 2) {
+        CB::Player::KillAnimation = 0;
     }
 }
 
