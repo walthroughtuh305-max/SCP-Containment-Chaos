@@ -5,8 +5,8 @@ float safevalue = 1800;
 float euclidvalue = 900;
 float ketervalue = 600;
 
-int RandStart = 2;
-int RandEnd = 2;
+int RandStart = 1;
+int RandEnd = 17;
 
 CB::Sound buzz;
 Image TimerIcon, TimerMeter;
