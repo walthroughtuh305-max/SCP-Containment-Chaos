@@ -8,17 +8,17 @@ Australia (flip camera upside down) (60 sec)
 
 NTF Spawn (Safe: 1 in 20, Euclid: 1 in 40, Keter: 1 in 60)
 
-Lights out (1 in 2) (30 sec)
+Lights out (30 sec)
 
 Death (Safe: 1 in 20, Euclid: 1 in 40, Keter: none)
 
 Unfair and fair 173 (moves when you are not looking, but its slow) (15 sec)
 
-Speeded NPCs
+Speeded NPCs (1 in 10)
 
 Teleport to Pocket Dimension (1 in 10)
 
-Teleport to start
+Teleport to start (1 in 10)
 
 Refill of batteries
 
