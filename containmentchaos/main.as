@@ -44,7 +44,7 @@ void Hook_Update() {
         } 
         if (safevalue <= 0) {
             buzz.Play();
-            Hook_ChaosEvent(B3D::Rand(RandStart, RandEnd));
+            Hook_ChaosEvent(Rand(RandStart, RandEnd));
             safevalue = 1800;
         }
     } else if (CB::Difficulty::Current.Name == "Euclid" && Menu::IsAnyOpen() == false) {
@@ -53,7 +53,7 @@ void Hook_Update() {
         } 
         if (euclidvalue <= 0) {
             buzz.Play();
-            Hook_ChaosEvent(B3D::Rand(RandStart, RandEnd));
+            Hook_ChaosEvent(Rand(RandStart, RandEnd));
             euclidvalue = 900;
         }
     } else if (CB::Difficulty::Current.Name == "Keter" && Menu::IsAnyOpen() == false) {
@@ -62,7 +62,7 @@ void Hook_Update() {
         } 
         if (ketervalue <= 0) {
             buzz.Play();
-            Hook_ChaosEvent(B3D::Rand(RandStart, RandEnd));
+            Hook_ChaosEvent(Rand(RandStart, RandEnd));
             ketervalue = 600;
         }
     }
@@ -92,7 +92,7 @@ void Hook_ChaosEvent(int randomevent) {
         NPC::Create(NPC::Type::SCP096, Player::Collider.GetX(true), Player::Collider.GetY(true), Player::Collider.GetZ(true));
     }
     if (randomevent == 2) {
-        eventchance = B3D::Rand(1, 5);
+        eventchance = Rand(1, 5);
         if (eventchance == 1) {
             eventname = "Fake death";
             CB::Player::KillAnimation = 1;
