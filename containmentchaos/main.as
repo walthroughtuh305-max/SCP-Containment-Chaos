@@ -5,6 +5,9 @@ float safevalue = 1800;
 float euclidvalue = 900;
 float ketervalue = 600;
 
+int RandStart = 2;
+int RandEnd = 2;
+
 CB::Sound buzz;
 Image TimerIcon, TimerMeter;
 
@@ -22,7 +25,7 @@ void Hook_Update() {
         } 
         if (safevalue <= 0) {
             buzz.Play();
-            Hook_ChaosEvent(B3D::Rand(1, 5));
+            Hook_ChaosEvent(B3D::Rand(RandStart, RandEnd));
             safevalue = 1800;
         }
     } else if (CB::Difficulty::Current.Name == "Euclid" && Menu::IsAnyOpen() == false) {
@@ -31,7 +34,7 @@ void Hook_Update() {
         } 
         if (euclidvalue <= 0) {
             buzz.Play();
-            Hook_ChaosEvent(B3D::Rand(1, 5));
+            Hook_ChaosEvent(B3D::Rand(RandStart, RandEnd));
             euclidvalue = 900;
         }
     } else if (CB::Difficulty::Current.Name == "Keter" && Menu::IsAnyOpen() == false) {
@@ -40,7 +43,7 @@ void Hook_Update() {
         } 
         if (ketervalue <= 0) {
             buzz.Play();
-            Hook_ChaosEvent(B3D::Rand(1, 17));
+            Hook_ChaosEvent(B3D::Rand(RandStart, RandEnd));
             ketervalue = 600;
         }
     }
