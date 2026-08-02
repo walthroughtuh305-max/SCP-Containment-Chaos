@@ -56,18 +56,7 @@ void StartTimer(int id, float duration) {
     activeetimers.InsertLast(@newtimer);
 }
 
-//int HUDStartX, HUDEndX, HUDStartY, HUDEndY;
-
 void Hook_Update() {
-    //if (GraphicsWidth > GraphicsHeight) {
-    //    HUDStartY = 0; HUDEndY = GraphicsHeight;
-    //    HUDStartX = Options::HUDOffsetScale * GraphicsWidth / 2;
-    //    HUDEndX = GraphicsWidth - HUDStartX;
-    //} else if (GraphicsWidth < GraphicsHeight) {
-    //    HUDStartX = 0; HUDEndX = GraphicsWidth;
-    //    HUDStartY = Options::HUDOffsetScale * GraphicsHeight / 2;
-    //    HUDEndY = GraphicsHeight - HUDStartY;
-    //}
     if (Menu::IsMainMenuOpen) return;
     if (CB::Difficulty::Current.Name == "Safe" && Menu::IsAnyOpen() == false) {
         timervalueset = safevalueset;
