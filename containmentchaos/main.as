@@ -51,6 +51,7 @@ class etimer {
 
 array<etimer@> activeetimers;
 
+// Create and start a new etimer
 void StartTimer(int id, float duration) {
     etimer newtimer(id, duration);
     activeetimers.InsertLast(@newtimer);
@@ -58,6 +59,8 @@ void StartTimer(int id, float duration) {
 
 void Hook_Update() {
     if (Menu::IsMainMenuOpen) return;
+
+    // Setup values for each difficulty
     if (CB::Difficulty::Current.Name == "Safe" && Menu::IsAnyOpen() == false) {
         timervalueset = safevalueset;
         timervalue = safevalue;
