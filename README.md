@@ -20,7 +20,7 @@ A pretty simple mod made in SCP: CB 1.3.12 made by the SCP-CB Community Preserva
   
   Brine
   
-  Apyr (insanely helpful developer)
+  Apyr
 
 ## Listed Events (some may be planned and not finished yet)
 * ~~Spawn 096~~ (Safe: 1 in 30, Euclid: 1 in 40, Keter: none)
