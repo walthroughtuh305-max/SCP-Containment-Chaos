@@ -60,6 +60,7 @@ void Hook_Update() {
     if (Menu::IsMainMenuOpen) return;
 
     // Setup values for each difficulty
+		// Change the timer depending on difficulty factors for support for custom gamemodes
     if (CB::Difficulty::Current.Name == "Safe" && Menu::IsAnyOpen() == false) {
         timervalueset = safevalueset;
         timervalue = safevalue;
