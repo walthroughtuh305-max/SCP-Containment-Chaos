@@ -33,8 +33,8 @@ Image TimerIcon, TimerMeter;
 
 void Hook_Initialize() {
     buzz = CB::Sound::Load("SFX\\Radio\\Buzz.ogg");
-    TimerIcon = LoadImage("GFX\\TimerIcon.png", 1.0);
-    TimerMeter = LoadImage("GFX\\TimerMeter.png", 1.0);
+    TimerIcon = LoadImageHUDScaled("GFX\\TimerIcon.png");
+    TimerMeter = LoadImageHUDScaled("GFX\\TimerMeter.png");
 }
 
 class etimer {
