@@ -4,6 +4,7 @@ using namespace B3D;
 #include "events.as"
 
 // TIMERS
+// Remove safe, euclid, keter timers and their sets and leave timervalue and its set
 float safevalueset = 1800;
 float safevalue = safevalueset;
 
