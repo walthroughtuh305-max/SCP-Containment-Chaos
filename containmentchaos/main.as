@@ -131,6 +131,7 @@ bool Hook_DrawHUD() {
 }
 
 bool Hook_MouseLook() {
+		// FIX: Cameras not moving with the player when returned true
     bool CollidedFloor = false;
     for (int i = 1; i <= CB::Player::Head.CountCollisions(); i++) {
         if (CB::Player::Head.CollisionY(i) < CB::Player::Head.GetY() - 0.01f) CollidedFloor = true;
