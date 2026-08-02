@@ -72,7 +72,7 @@ void OnEventTimerComplete(int id) {
         flippedcamera = false;
     }
     if (id == 5) {
-        lightsout = true;
+        lightsout = false;
     }
     if (id == 18) {
         dooropenevent = false;
