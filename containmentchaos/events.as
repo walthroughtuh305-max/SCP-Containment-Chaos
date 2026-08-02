@@ -64,16 +64,25 @@ void Hook_ChaosEvent(int randomevent) {
     }
 }
 
+// Clear/reset variables when a etimer is complete
 void OnEventTimerComplete(int id) {
+    // id 2: Fake death
+    // Reset FakeDeathAnim to -1
     if (id == 2) {
         FakeDeathAnim = -1;
     }
+    // id 3: Australia
+    // Reset flippedcamera to false
     if (id == 3) {
         flippedcamera = false;
     }
+    // id 5: Lights Out
+    // Reset lightsout to false
     if (id == 5) {
         lightsout = false;
     }
+    // id 18: Open every door the player is closest to
+    // Reset dooropenevent to false
     if (id == 18) {
         dooropenevent = false;
     }
