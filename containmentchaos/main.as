@@ -3,8 +3,6 @@ using namespace B3D;
 
 #include "events.as"
 
-int FakeDeathAnim = -1;
-
 // TIMERS
 float safevalueset = 1800;
 float safevalue = safevalueset;
