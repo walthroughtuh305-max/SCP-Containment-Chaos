@@ -4,17 +4,11 @@ using namespace B3D;
 #include "events.as"
 
 // TIMERS
-// Remove safe, euclid, keter timers and their sets and leave timervalue and its set
-float safevalueset = 1800;
-float safevalue = safevalueset;
+float timervalueset, timervalue = 999999;
 
-float euclidvalueset = 900;
-float euclidvalue = euclidvalueset;
-
-float ketervalueset = 600;
-float ketervalue = ketervalueset;
-
-float timervalueset, timervalue;
+// Seconds, used for custom timer sets (only supports 5, 10, 15, 20, 30, 40, 50, and 60. Might be freely customizable in the future)
+// seconds = 0: Deafult (depends on OtherFactors), more than 0 means the amount of seconds the timer should be set to. This is only applied when the difficulty is set to Customizable.
+int seconds, secondssetting /* used for selecting the seconds */;
 
 // VALUES
 int RandStart = 1;
@@ -34,6 +28,11 @@ void Hook_Initialize() {
     buzz = CB::Sound::Load("SFX\\Radio\\Buzz.ogg");
     TimerIcon = LoadImageHUDScaled("GFX\\TimerIcon.png");
     TimerMeter = LoadImageHUDScaled("GFX\\TimerMeter.png");
+}
+
+bool Hook_LoadEntities() {
+    timervalue = 999999;
+    return false;
 }
 
 class etimer {
@@ -59,41 +58,28 @@ void StartTimer(int id, float duration) {
 void Hook_Update() {
     if (Menu::IsMainMenuOpen) return;
 
-    // Setup values for each difficulty
-		// Change the timer depending on difficulty factors for support for custom gamemodes
-    if (CB::Difficulty::Current.Name == "Safe" && Menu::IsAnyOpen() == false) {
-        timervalueset = safevalueset;
-        timervalue = safevalue;
-        if (safevalue > 0) {
-            safevalue = safevalue - FPSFactor;
-        } 
-        if (safevalue <= 0) {
-            buzz.Play();
-            Hook_ChaosEvent(Rand(RandStart, RandEnd));
-            safevalue = safevalueset;
-        }
-    } else if (CB::Difficulty::Current.Name == "Euclid" && Menu::IsAnyOpen() == false) {
-        timervalueset = euclidvalueset;
-        timervalue = euclidvalue;
-        if (euclidvalue > 0) {
-            euclidvalue = euclidvalue - FPSFactor;
-        } 
-        if (euclidvalue <= 0) {
-            buzz.Play();
-            Hook_ChaosEvent(Rand(RandStart, RandEnd));
-            euclidvalue = euclidvalueset;
-        }
-    } else if (CB::Difficulty::Current.Name == "Keter" && Menu::IsAnyOpen() == false) {
-        timervalueset = ketervalueset;
-        timervalue = ketervalue;
-        if (ketervalue > 0) {
-            ketervalue = ketervalue - FPSFactor;
-        } 
-        if (ketervalue <= 0) {
-            buzz.Play();
-            Hook_ChaosEvent(Rand(RandStart, RandEnd));
-            ketervalue = ketervalueset;
-        }
+    // Setup values for other difficulty factors, or custom
+    if (Difficulty::Current.Other == Difficulty::OtherFactors::Easy && seconds == 0 && Menu::IsAnyOpen() == false) {
+        timervalueset = 70 * 30;
+    } else if (Difficulty::Current.Other == Difficulty::OtherFactors::Normal && seconds == 0 && Menu::IsAnyOpen() == false) {
+        timervalueset = 70 * 20;
+    } else if (Difficulty::Current.Other == Difficulty::OtherFactors::Hard && seconds == 0 && Menu::IsAnyOpen() == false) {
+        timervalueset = 70 * 10;
+    } else if (Difficulty::Current.Customizable == true && seconds > 0 && Menu::IsAnyOpen() == false) {
+        timervalueset = 70 * seconds;
+    }
+
+    // Timer logic
+    if (timervalue > 0) {
+        timervalue = timervalue - FPSFactor;
+    } 
+    if (timervalue <= 0) {
+        buzz.Play();
+        Hook_ChaosEvent(Rand(RandStart, RandEnd));
+        timervalue = timervalueset;
+    }
+    if (timervalue > timervalueset) {
+        timervalue = timervalueset;
     }
 
     for (uint i = 0; i < activeetimers.Length; i++) {
@@ -123,7 +109,7 @@ bool Hook_DrawHUD() {
 }
 
 bool Hook_MouseLook() {
-		// FIX: Cameras not moving with the player when returned true
+	// FIX: Cameras not moving with the player when returned true
     bool CollidedFloor = false;
     for (int i = 1; i <= CB::Player::Head.CountCollisions(); i++) {
         if (CB::Player::Head.CollisionY(i) < CB::Player::Head.GetY() - 0.01f) CollidedFloor = true;
@@ -142,6 +128,12 @@ bool Hook_MouseLook() {
             CB::Player::Camera.Rotate(CurveAngle(CB::Player::Head.GetPitch() + 40.0f, CB::Player::Camera.GetPitch(), 40.0f), CB::Player::Camera.GetYaw(), CB::Player::Camera.GetRoll());
         }
         CB::Player::HeadDropSpeed = CB::Player::HeadDropSpeed - 0.002f * FPSFactor;
+        return true;
+    }
+
+    // FLIPPED CAMERA
+    if (flippedcamera == true) {
+        Player::Camera.Rotate(Player::Head.GetPitch(), Player::Head.GetYaw(), Player::Head.GetRoll() + 180);
         return true;
     }
     return false;
