@@ -49,7 +49,7 @@ class etimer {
 
 array<etimer@> activeetimers;
 
-// Create and start a new etimer
+// Create and start a new event timer (etimer)
 void StartTimer(int id, float duration) {
     etimer newtimer(id, duration);
     activeetimers.InsertLast(@newtimer);
