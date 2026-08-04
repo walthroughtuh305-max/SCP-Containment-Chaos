@@ -7,7 +7,7 @@ using namespace B3D;
 float timervalueset, timervalue = 999999;
 
 // Seconds, used for custom timer sets (only supports 5, 10, 15, 20, 30, 40, 50, and 60. Might be freely customizable in the future)
-// seconds = 0: Deafult (depends on OtherFactors), more than 0 means the amount of seconds the timer should be set to. This is only applied when the difficulty is set to Customizable.
+// seconds = 0: Default (depends on OtherFactors), more than 0 means the amount of seconds the timer should be set to. This is only applied when the difficulty is set to Customizable.
 int seconds, secondssetting /* used for selecting the seconds */;
 
 // VALUES
