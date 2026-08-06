@@ -94,6 +94,25 @@ void Hook_Update() {
     }
 }
 
+bool Hook_UpdateDoor(CB::Door d) {
+    float playerDistance = 0;
+    if (d.FrameObject != null) {
+        playerDistance = Sqr(DistanceSquared(
+            d.Object.GetX(true),
+            Player::Collider.GetX(true),
+            d.Object.GetY(true),
+            Player::Collider.GetY(true),
+            d.Object.GetZ(true),
+            Player::Collider.GetZ(true)
+        ));
+    }
+
+    if (playerDistance <= 5 && dooropenevent == true && d.KeyCard == 0 && d.Code == "" && d.Locked == false && d.Open == false) {
+        d.Use();
+    }
+    return false;
+}
+
 bool Hook_DrawHUD() {
     // HUD::EndY - 135 * HUD::Scale = Timer Bar y-axis
     // HUD::EndY - 95 * HUD::Scale = Blink Bar y-axis
