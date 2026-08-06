@@ -31,7 +31,7 @@ void Hook_ChaosEvent(int randomevent) {
         if (eventchance == 1) {
             eventname = "Fake death";
             FakeDeathAnim = Rand(0, 1);
-            StartTimer(randomevent, 300);
+            StartTimer(randomevent, 70 * 5);
         } else if (eventchance != 1) Hook_ChaosEvent(Rand(RandStart, RandEnd));
     }
     // Event 3: Australia
@@ -39,7 +39,7 @@ void Hook_ChaosEvent(int randomevent) {
     if (randomevent == 3) {
         eventname = "Australia";
         flippedcamera = true;
-        StartTimer(randomevent, 3600);
+        StartTimer(randomevent, 70 * 60);
     }
     // Event 4: Inverted controls
     if (randomevent == 4) {
@@ -47,20 +47,20 @@ void Hook_ChaosEvent(int randomevent) {
         if (eventchance == 1) {
             eventname = "Inverted controls";
             CB::Options::InvertMouse = true;
-            StartTimer(randomevent, 1800);
+            StartTimer(randomevent, 70 * 30);
         } else if (eventchance != 1) Hook_ChaosEvent(Rand(RandStart, RandEnd));
     }
     // Event 5: Lights Out
     if (randomevent == 5) {
         eventname = "Lights Out";
         lightsout = true;
-        StartTimer(randomevent, 1800);
+        StartTimer(randomevent, 70 * 30);;
     }
-    // Event 18: Open every door the player is closest to
-    if (randomevent == 18) {
+    // Event 17: Open every door the player is closest to
+    if (randomevent == 17) {
         eventname = "Open every door the player is closest to";
         dooropenevent = true;
-        StartTimer(randomevent, 900);
+        StartTimer(randomevent, 70 * 15);
     }
 }
 
@@ -76,14 +76,21 @@ void OnEventTimerComplete(int id) {
     if (id == 3) {
         flippedcamera = false;
     }
+    // id 4: Inverted controls
+    // Reset InvertMouse to false
+    if (id == 4) {
+        if (CB::Options::InvertMouse == true) {
+            CB::Options::InvertMouse = false;
+        }
+    }
     // id 5: Lights Out
     // Reset lightsout to false
     if (id == 5) {
         lightsout = false;
     }
-    // id 18: Open every door the player is closest to
+    // id 17: Open every door the player is closest to
     // Reset dooropenevent to false
-    if (id == 18) {
+    if (id == 17) {
         dooropenevent = false;
     }
 }
